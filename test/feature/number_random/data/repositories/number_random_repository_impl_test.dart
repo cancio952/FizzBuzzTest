@@ -85,6 +85,33 @@ void main() {
         expect(result, equals(Left(ServerFailure())));
       });
     });
-    group("device offline", () {});
+    group("device offline", () {
+      setUp(() {
+        when(mockNetworkInfo.isConnected)
+            .thenAnswer((realInvocation) async => false);
+      });
+      test("should return last locally cached data when the data is present",
+          () async {
+        when(mockRemoteDataSource.getNumberRandom())
+            .thenAnswer((_) async => tNumberRandomModel);
+
+        final result = await repositoryImpl.getNumberRandom();
+        verifyZeroInteractions(mockRemoteDataSource);
+        verify(mockLocalDataSource.getLastNumber());
+
+        expect(result, equals(Left(ServerFailure())));
+      });
+
+      test("should return cache failure when there is not data present",
+          () async {
+        when(mockLocalDataSource.getLastNumber()).thenThrow(CacheExeption());
+
+        final result = await repositoryImpl.getNumberRandom();
+        verifyZeroInteractions(mockRemoteDataSource);
+        verify(mockLocalDataSource.getLastNumber());
+
+        expect(result, equals(Left(CacheFailure())));
+      });
+    });
   });
 }

@@ -20,13 +20,19 @@ class NumberRandomRepositoryImpl implements NumberRandomRepository {
 
   @override
   Future<Either<Failure, NumberRandom>> getNumberRandom() async {
-    networkInfo.isConnected;
     try {
-      final remote = await remoteDataSource.getNumberRandom();
-      localDataSource.cacheNumber(remote);
-      return Right(remote);
+      if (await networkInfo.isConnected) {
+        final remote = await remoteDataSource.getNumberRandom();
+        localDataSource.cacheNumber(remote);
+        return Right(remote);
+      } else {
+        final local = await localDataSource.getLastNumber();
+        return Right(local);
+      }
     } on ServerException {
       return Left(ServerFailure());
+    } on CacheExeption {
+      return Left(CacheFailure());
     }
   }
 }
