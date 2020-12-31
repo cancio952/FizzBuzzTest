@@ -18,8 +18,10 @@ class NumberRandomRepositoryImpl implements NumberRandomRepository {
       @required this.localDataSource});
 
   @override
-  Future<Either<Failure, NumberRandom>> getNumberRandom() {
+  Future<Either<Failure, NumberRandom>> getNumberRandom() async {
     networkInfo.isConnected;
-    return null;
+    final remote = await remoteDataSource.getNumberRandom();
+    localDataSource.cacheNumber(remote);
+    return Right(remote);
   }
 }
