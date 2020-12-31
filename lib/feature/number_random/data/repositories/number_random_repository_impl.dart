@@ -1,3 +1,4 @@
+import 'package:FizzBuzzTest/core/failure/exeption.dart';
 import 'package:FizzBuzzTest/core/failure/failure.dart';
 import 'package:FizzBuzzTest/core/platform/network_info.dart';
 import 'package:FizzBuzzTest/feature/number_random/data/datasources/local_number_random_datasource.dart';
@@ -20,8 +21,12 @@ class NumberRandomRepositoryImpl implements NumberRandomRepository {
   @override
   Future<Either<Failure, NumberRandom>> getNumberRandom() async {
     networkInfo.isConnected;
-    final remote = await remoteDataSource.getNumberRandom();
-    localDataSource.cacheNumber(remote);
-    return Right(remote);
+    try {
+      final remote = await remoteDataSource.getNumberRandom();
+      localDataSource.cacheNumber(remote);
+      return Right(remote);
+    } on ServerException {
+      return Left(ServerFailure());
+    }
   }
 }

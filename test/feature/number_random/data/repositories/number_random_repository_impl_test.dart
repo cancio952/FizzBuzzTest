@@ -1,3 +1,5 @@
+import 'package:FizzBuzzTest/core/failure/exeption.dart';
+import 'package:FizzBuzzTest/core/failure/failure.dart';
 import 'package:FizzBuzzTest/core/platform/network_info.dart';
 import 'package:FizzBuzzTest/feature/number_random/data/datasources/local_number_random_datasource.dart';
 import 'package:FizzBuzzTest/feature/number_random/data/datasources/remote_numote_random_datasource.dart';
@@ -69,6 +71,18 @@ void main() {
         await repositoryImpl.getNumberRandom();
         verify(mockRemoteDataSource.getNumberRandom());
         verify(mockLocalDataSource.cacheNumber(tNumberRandomModel));
+      });
+
+      test(
+          "should return Server exception  when the call to remote data is unsuccessful",
+          () async {
+        when(mockRemoteDataSource.getNumberRandom())
+            .thenThrow(ServerException());
+
+        final result = await repositoryImpl.getNumberRandom();
+        verify(mockRemoteDataSource.getNumberRandom());
+        verifyZeroInteractions(mockLocalDataSource);
+        expect(result, equals(Left(ServerFailure())));
       });
     });
     group("device offline", () {});
