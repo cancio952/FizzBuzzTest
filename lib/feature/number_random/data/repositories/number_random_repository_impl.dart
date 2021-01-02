@@ -26,7 +26,7 @@ class NumberRandomRepositoryImpl implements NumberRandomRepository {
         localDataSource.cacheNumber(remote);
         return Right(remote);
       } else {
-        final local = await localDataSource.getLastNumber();
+        final local = await localDataSource.getRandomNumber();
         return Right(local);
       }
     } on ServerException {
