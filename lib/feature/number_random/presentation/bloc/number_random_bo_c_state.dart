@@ -21,3 +21,12 @@ class NumberRandomBoCLoaded extends NumberRandomBoCState {
   @override
   List<Object> get props => [numberRandom];
 }
+
+class NumberRandomBoCError extends NumberRandomBoCState {
+  final String message;
+
+  NumberRandomBoCError(this.message);
+
+  @override
+  List<Object> get props => [message];
+}
