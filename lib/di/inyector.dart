@@ -5,12 +5,13 @@ import 'package:FizzBuzzTest/feature/number_random/data/repositories/number_rand
 import 'package:FizzBuzzTest/feature/number_random/domain/repositories/number_randon_repository.dart';
 import 'package:FizzBuzzTest/feature/number_random/domain/usecases/get_number_random.dart';
 import 'package:FizzBuzzTest/feature/number_random/presentation/bloc/number_random_bo_c_bloc.dart';
+import 'package:data_connection_checker/data_connection_checker.dart';
 import 'package:get_it/get_it.dart';
 import 'package:http/http.dart' as http;
 
 final instance = GetIt.instance;
 
-void init() {
+Future<void> init() async {
   ///Feature
   instance.registerFactory(() => NumberRandomBoCBloc(instance()));
 
@@ -36,4 +37,5 @@ void init() {
 
   ///External
   instance.registerLazySingleton(() => http.Client);
+  instance.registerLazySingleton(() => DataConnectionChecker());
 }
