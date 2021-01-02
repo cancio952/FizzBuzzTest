@@ -7,7 +7,7 @@ class NumberRandomModel extends NumberRandom {
 
   factory NumberRandomModel.fromJson(Map<String, dynamic> json) {
     return NumberRandomModel(
-        text: json["text"], number: (json["number"] as num).toInt());
+        text: json["text"] as String, number: (json["number"] as num).toInt());
   }
 
   Map<String, dynamic> toJson() {

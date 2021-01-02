@@ -36,6 +36,6 @@ Future<void> init() async {
       () => NetworkInfoImpl(dataConnectionChecker: instance()));
 
   ///External
-  instance.registerLazySingleton(() => http.Client);
+  instance.registerLazySingleton(() => http.Client());
   instance.registerLazySingleton(() => DataConnectionChecker());
 }

@@ -13,10 +13,7 @@ abstract class LocalNumberRandomDataSource {
 
 class LocalNumberRandomDataSourceImpl implements LocalNumberRandomDataSource {
   @override
-  Future<void> cacheNumber(NumberRandom numberRandom) {
-    // TODO: implement cacheNumber
-    throw UnimplementedError();
-  }
+  Future<void> cacheNumber(NumberRandom numberRandom) async {}
 
   @override
   Future<NumberRandom> getRandomNumber() async {

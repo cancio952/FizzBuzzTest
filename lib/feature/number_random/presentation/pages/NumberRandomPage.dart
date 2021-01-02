@@ -22,32 +22,35 @@ class _NumberRandomPageState
             // horizontal).
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
-              BlocConsumer<NumberRandomBoCBloc, NumberRandomBoCState>(
-                  builder: (c, s) {
-                if (s is NumberRandomBoCLoading) {
-                  return Text(
-                    "Loading ...",
-                    style: Theme.of(context).textTheme.headline4,
-                  );
-                } else if (s is NumberRandomBoCLoaded) {
-                  return Text(
-                    s.numberRandom.getFizzBuzz(),
-                    style: Theme.of(context).textTheme.headline4,
-                  );
-                } else if (s is NumberRandomBoCError) {
-                  return Text(
-                    s.message,
-                    style: Theme.of(context).textTheme.headline4,
-                  );
-                } else {
-                  return Text(
-                    "push the button to get a FizzBuzz",
-                    style: Theme.of(context).textTheme.headline4,
-                  );
-                }
-              }, listener: (c, s) {
-                return Container();
-              })
+              Container(
+                padding: EdgeInsets.all(16),
+                child: BlocConsumer<NumberRandomBoCBloc, NumberRandomBoCState>(
+                    builder: (c, s) {
+                  if (s is NumberRandomBoCLoading) {
+                    return Text(
+                      "Loading ...",
+                      style: Theme.of(context).textTheme.headline4,
+                    );
+                  } else if (s is NumberRandomBoCLoaded) {
+                    return Text(
+                      s.numberRandom.getFizzBuzz(),
+                      style: Theme.of(context).textTheme.headline4,
+                    );
+                  } else if (s is NumberRandomBoCError) {
+                    return Text(
+                      s.message,
+                      style: Theme.of(context).textTheme.headline4,
+                    );
+                  } else {
+                    return Text(
+                      "push the button to get a FizzBuzz",
+                      style: Theme.of(context).textTheme.headline4,
+                    );
+                  }
+                }, listener: (c, s) {
+                  return Container();
+                }),
+              )
             ],
           ),
         ),

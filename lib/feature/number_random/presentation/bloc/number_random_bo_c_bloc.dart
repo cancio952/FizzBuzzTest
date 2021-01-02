@@ -19,7 +19,7 @@ class NumberRandomBoCBloc
   Stream<NumberRandomBoCState> mapEventToState(
     NumberRandomBoCEvent event,
   ) async* {
-    if (state is GetNumberRandomBoCEvent) {
+    if (event is GetNumberRandomBoCEvent) {
       yield NumberRandomBoCLoading();
       final result = await getNumberRandom.call(null);
       yield result.fold((l) => NumberRandomBoCError("Error"),
