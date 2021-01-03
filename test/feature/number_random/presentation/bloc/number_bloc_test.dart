@@ -27,7 +27,6 @@ void main() {
       when(mockGetNumberRandom(null))
           .thenAnswer((_) async => Right(tNumberRandom));
       final expected = [
-        NumberRandomBoCInitial(),
         NumberRandomBoCLoading(),
         NumberRandomBoCLoaded(tNumberRandom)
       ];
@@ -40,7 +39,6 @@ void main() {
       when(mockGetNumberRandom(null))
           .thenAnswer((_) async => Left(ServerFailure()));
       final expected = [
-        NumberRandomBoCInitial(),
         NumberRandomBoCLoading(),
         NumberRandomBoCError("Error")
       ];
