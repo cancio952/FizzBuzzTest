@@ -1,5 +1,6 @@
-Feature : Main screen get fizz buzz number pressing the button
+Feature: Multiple site support.
   Scenario: the button get is pressed
     Given I have "FizzBuzzButton" and "FizzBuzzText"
-    Then I tap the "FizzBuzzButton" button
+    When I tap the "FizzBuzzButton" button
     Then I should have the "NumberRandomPage" page
+

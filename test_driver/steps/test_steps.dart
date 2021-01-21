@@ -16,7 +16,7 @@ class CheckGivenWidgets extends Given2WithWorld<String, String, FlutterWorld> {
   RegExp get pattern => RegExp(r"I have {string} and {string}");
 }
 
-class ClickFizzBuzzButton extends Then1WithWorld<String, FlutterWorld> {
+class ClickFizzBuzzButton extends When1WithWorld<String, FlutterWorld> {
   @override
   Future<void> executeStep(String fizzBuzzButton) async {
     final button = find.byValueKey(fizzBuzzButton);
@@ -31,8 +31,8 @@ class CheckIfRandomNumberPageIsPresent
     extends Then1WithWorld<String, FlutterWorld> {
   @override
   Future<void> executeStep(String input1) async {
-    final homefinder = find.byValueKey(input1);
-    await FlutterDriverUtils.isPresent(world.driver, homefinder);
+    final homeFinder = find.byValueKey(input1);
+    await FlutterDriverUtils.isPresent(world.driver, homeFinder);
   }
 
   @override

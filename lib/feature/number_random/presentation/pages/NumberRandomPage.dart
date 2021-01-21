@@ -13,6 +13,7 @@ class _NumberRandomPageState
   @override
   Widget buildWidget(BuildContext context) {
     return Scaffold(
+      key: Key("NumberRandomPage"),
       appBar: AppBar(
         title: Text("FizzBuzz"),
       ),
@@ -30,21 +31,25 @@ class _NumberRandomPageState
                     return Text(
                       "Loading ...",
                       style: Theme.of(context).textTheme.headline4,
+                      key: Key("FizzBuzzText"),
                     );
                   } else if (s is NumberRandomBoCLoaded) {
                     return Text(
                       s.numberRandom.getFizzBuzz(),
                       style: Theme.of(context).textTheme.headline4,
+                      key: Key("FizzBuzzText"),
                     );
                   } else if (s is NumberRandomBoCError) {
                     return Text(
                       s.message,
                       style: Theme.of(context).textTheme.headline4,
+                      key: Key("FizzBuzzText"),
                     );
                   } else {
                     return Text(
                       "push the button to get a FizzBuzz",
                       style: Theme.of(context).textTheme.headline4,
+                      key: Key("FizzBuzzText"),
                     );
                   }
                 }, listener: (c, s) {
@@ -61,6 +66,7 @@ class _NumberRandomPageState
         },
         tooltip: 'Increment',
         child: Icon(Icons.text_rotation_angledown),
+        key: Key("FizzBuzzButton"),
       ), // This trailing comma makes auto-formatting nicer for build methods.
     );
   }
