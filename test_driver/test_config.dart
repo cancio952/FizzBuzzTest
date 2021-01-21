@@ -16,7 +16,7 @@ Future<void> main() {
       CheckIfRandomNumberPageIsPresent(),
     ]
     ..restartAppBetweenScenarios = true
-    ..targetAppPath = "test_driver/main.dart"
+    ..targetAppPath = "test_driver/app.dart"
     ..exitAfterTestRun = true;
   return GherkinRunner().execute(config);
 }
